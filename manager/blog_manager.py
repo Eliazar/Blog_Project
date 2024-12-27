@@ -2,7 +2,7 @@ import requests
 
 class BlogManager:
     def __init__(self) -> None:
-        self.BLOG_POST_BASE_URI = "https://api.npoint.io/c790b4d5cab58020d391"
+        self.BLOG_POST_BASE_URI = "https://api.npoint.io/a7a6b29ec221cc358fab"
 
 
     def get_blog_posts(self):
