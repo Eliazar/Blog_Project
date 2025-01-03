@@ -1,6 +1,8 @@
 from flask import Flask
 from flask import render_template
+from flask import request
 from manager import blog_manager
+from manager import email_manager
 
 app = Flask(__name__)
 
@@ -15,9 +17,21 @@ def about_page():
     return render_template("about.html")
 
 
-@app.route("/contact")
+@app.route("/contact", methods=["GET","POST"])
 def contact_page():
-    return render_template("contact.html")
+    success = None
+    
+    if request.method == "POST":       
+        emailManager = email_manager.MailManager()
+        emailManager.send_email(
+            name=request.form["name"],
+            email=request.form["email"],
+            phone=request.form["phone"],
+            message=request.form["message"])
+
+        success = "Successfully sent message"
+
+    return render_template("contact.html", success = success)
 
 
 @app.route("/post/<post_id>")
